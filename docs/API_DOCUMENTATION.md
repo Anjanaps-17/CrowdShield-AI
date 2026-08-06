@@ -12,10 +12,10 @@ This document describes the REST APIs developed for the CrowdShield AI backend.
 |---------|----------|-------------|--------|
 | GET | /health | Check backend status | ✅ Completed |
 | GET | /crowd-density | Retrieve crowd density information | ✅ Completed |
-| GET | /risk-level | Retrieve crowd risk level | ⏳ Planned |
-| GET | /alerts | Retrieve emergency alerts | ⏳ Planned |
-| GET | /evacuation-route | Retrieve evacuation route | ⏳ Planned |
-| POST | /upload-video | Upload CCTV video for analysis | ⏳ Planned |
+| GET | /risk-level | Retrieve crowd risk level | ✅ Completed |
+| GET | /alerts | Retrieve emergency alerts | ✅ Completed |
+| GET | /evacuation-route | Retrieve recommended evacuation route | ✅ Completed |
+| POST | /upload-video | Upload CCTV video for processing | ✅ Completed |
 
 ---
 
@@ -24,7 +24,6 @@ This document describes the REST APIs developed for the CrowdShield AI backend.
 ## 1. GET /health
 
 ### Description
-
 Checks whether the backend server is running.
 
 ### Response
@@ -41,8 +40,7 @@ Checks whether the backend server is running.
 ## 2. GET /crowd-density
 
 ### Description
-
-Returns the current crowd density detected in a monitored area.
+Returns the current crowd density information.
 
 ### Response
 
@@ -58,22 +56,76 @@ Returns the current crowd density detected in a monitored area.
 
 ## 3. GET /risk-level
 
-**Status:** Planned
+### Description
+Returns the predicted crowd risk level.
+
+### Response
+
+```json
+{
+    "risk_level": "Medium",
+    "confidence": 87,
+    "reason": "Moderate crowd density detected"
+}
+```
 
 ---
 
 ## 4. GET /alerts
 
-**Status:** Planned
+### Description
+Returns emergency alert information.
+
+### Response
+
+```json
+{
+    "alert": "High crowd congestion detected",
+    "priority": "High",
+    "zone": "Zone A"
+}
+```
 
 ---
 
 ## 5. GET /evacuation-route
 
-**Status:** Planned
+### Description
+Returns the recommended evacuation route.
+
+### Response
+
+```json
+{
+    "route": "Gate 2",
+    "estimated_time": "3 minutes",
+    "status": "Safe"
+}
+```
 
 ---
 
 ## 6. POST /upload-video
 
-**Status:** Planned
+### Description
+Uploads a CCTV video to the backend for processing.
+
+### Request
+
+**Method:** POST
+
+**Body:** form-data
+
+| Key | Type | Required |
+|-----|------|----------|
+| video | File | Yes |
+
+### Response
+
+```json
+{
+    "message": "Video uploaded successfully.",
+    "filename": "sample.mp4",
+    "status": "Processing"
+}
+```
