@@ -6,5 +6,5 @@ risk_bp = Blueprint("risk", __name__)
 
 @risk_bp.route("/risk-level", methods=["GET"])
 def get_risk():
-    data = get_risk_level()
+    data = get_risk_level("Medium")
     return jsonify(data)
