@@ -1,0 +1,264 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 14px;
+    background: #08121f;
+    border-right: 1px solid rgba(80, 150, 210, 0.13);
+    color: #e8f2ff;
+}
+
+
+/* BRAND */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 4px 8px 20px;
+    border-bottom: 1px solid rgba(80, 150, 210, 0.1);
+}
+
+.logo {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: linear-gradient( 135deg, #087fc4, #16c4df);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    box-shadow: 0 5px 20px rgba(0, 180, 255, 0.16);
+}
+
+.brandText h2 {
+    margin: 0;
+    color: #eef7ff;
+    font-size: 15px;
+    font-weight: 650;
+}
+
+.brandText span {
+    display: block;
+    margin-top: 3px;
+    color: #4e7695;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+
+/* SYSTEM STATUS */
+
+.systemStatus {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 18px 4px;
+    padding: 10px;
+    border: 1px solid rgba(40, 220, 160, 0.12);
+    border-radius: 6px;
+    background: rgba(40, 220, 160, 0.035);
+}
+
+.statusDot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #2bdba4;
+    box-shadow: 0 0 9px #2bdba4;
+}
+
+.systemStatus strong {
+    display: block;
+    color: #44d9ab;
+    font-size: 9px;
+}
+
+.systemStatus div span {
+    display: block;
+    margin-top: 3px;
+    color: #536f89;
+    font-size: 7px;
+}
+
+
+/* NAVIGATION */
+
+.navigation {
+    flex: 1;
+}
+
+.navigationTitle {
+    margin: 5px 10px 9px;
+    color: #3d5d78;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.navItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 43px;
+    margin-bottom: 4px;
+    padding: 0 12px;
+    border-radius: 6px;
+    color: #7089a1;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navItem:hover {
+    background: rgba(32, 184, 255, 0.055);
+    color: #b9d7ee;
+}
+
+.navItem.active {
+    background: rgba(22, 158, 222, 0.11);
+    color: #28baff;
+}
+
+.navItem.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 3px;
+    height: 22px;
+    border-radius: 0 3px 3px 0;
+    background: #20b8ff;
+    box-shadow: 0 0 10px rgba(32, 184, 255, 0.6);
+}
+
+.navIcon {
+    width: 21px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.navText {
+    font-size: 10px;
+    font-weight: 550;
+}
+
+
+/* BOTTOM */
+
+.bottomSection {
+    padding-top: 15px;
+    border-top: 1px solid rgba(80, 150, 210, 0.1);
+}
+
+
+/* ADMIN PROFILE */
+
+.adminProfile {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 10px;
+    padding: 10px 8px;
+    border-radius: 7px;
+    background: rgba(60, 120, 170, 0.045);
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient( 135deg, #1479b5, #20bfd9);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.adminInfo {
+    min-width: 0;
+    flex: 1;
+}
+
+.adminInfo strong {
+    display: block;
+    overflow: hidden;
+    color: #cddded;
+    font-size: 9px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.adminInfo span {
+    display: block;
+    margin-top: 3px;
+    color: #506b84;
+    font-size: 7px;
+}
+
+.logoutButton {
+    width: 26px;
+    height: 26px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: #637e98;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.logoutButton:hover {
+    background: rgba(230, 70, 85, 0.08);
+    color: #f16a75;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+    .sidebar {
+        width: 68px;
+        padding: 15px 9px;
+    }
+    .brand {
+        justify-content: center;
+        padding: 5px 0 18px;
+    }
+    .brandText,
+    .systemStatus,
+    .navigationTitle,
+    .navText,
+    .adminInfo,
+    .logoutButton {
+        display: none;
+    }
+    .navItem {
+        justify-content: center;
+        padding: 0;
+    }
+    .navIcon {
+        font-size: 17px;
+    }
+    .adminProfile {
+        justify-content: center;
+        padding: 8px 0;
+        background: transparent;
+    }
+    .navItem.active::before {
+        display: none;
+    }
+}

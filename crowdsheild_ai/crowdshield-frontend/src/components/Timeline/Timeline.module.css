@@ -1,0 +1,145 @@
+.timeline {
+    overflow: hidden;
+    border: 1px solid rgba(80, 150, 210, 0.12);
+    border-radius: 8px;
+    background: #091522;
+}
+
+
+/* HEADER */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 15px;
+    border-bottom: 1px solid rgba(80, 150, 210, 0.1);
+}
+
+.eyebrow {
+    color: #4c6d87;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+}
+
+.header h3 {
+    margin: 4px 0 0;
+    color: #dce9f5;
+    font-size: 13px;
+}
+
+.live {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #37dca8;
+    font-size: 7px;
+    font-weight: 700;
+}
+
+.live span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #37dca8;
+    box-shadow: 0 0 7px #37dca8;
+}
+
+
+/* EVENTS */
+
+.events {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 15px 10px;
+}
+
+.event {
+    position: relative;
+    display: grid;
+    grid-template-columns: 60px 18px 1fr;
+    min-height: 43px;
+    align-items: center;
+}
+
+.time {
+    color: #405d75;
+    font-family: monospace;
+    font-size: 7px;
+}
+
+
+/* CONNECTING LINE */
+
+.marker {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.marker::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 3px;
+    width: 1px;
+    height: 37px;
+    background: rgba(80, 150, 210, 0.13);
+}
+
+.event:last-child .marker::after {
+    display: none;
+}
+
+
+/* MARKER COLORS */
+
+.marker.critical {
+    background: #ed5661;
+    box-shadow: 0 0 8px rgba(237, 86, 97, 0.65);
+}
+
+.marker.warning {
+    background: #e6a43d;
+    box-shadow: 0 0 7px rgba(230, 164, 61, 0.5);
+}
+
+.marker.normal {
+    background: #2bd5a0;
+    box-shadow: 0 0 7px rgba(43, 213, 160, 0.45);
+}
+
+
+/* EVENT CONTENT */
+
+.eventContent {
+    min-width: 0;
+}
+
+.eventContent strong,
+.eventContent span {
+    display: block;
+}
+
+.eventContent strong {
+    overflow: hidden;
+    color: #b9cedf;
+    font-size: 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.eventContent span {
+    margin-top: 3px;
+    overflow: hidden;
+    color: #4d6981;
+    font-size: 7px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.event:hover .eventContent strong {
+    color: #dceaf6;
+}

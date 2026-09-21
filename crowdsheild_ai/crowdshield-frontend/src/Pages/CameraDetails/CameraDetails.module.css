@@ -1,0 +1,58 @@
+.page {
+    min-height: 100vh;
+    margin-left: 250px;
+    padding: 25px;
+    background: #050d16;
+    color: #e5f0fa;
+}
+
+.header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.header span {
+    color: #258ebc;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.header h1 {
+    margin: 6px 0;
+    font-size: 24px;
+}
+
+.header p {
+    margin: 0;
+    color: #506b82;
+    font-size: 9px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 10px;
+    border: 1px solid rgba(40, 220, 160, 0.15);
+    border-radius: 4px;
+    color: #35dba6 !important;
+    font-size: 7px !important;
+}
+
+.status i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #35dba6;
+    box-shadow: 0 0 8px #35dba6;
+}
+
+.content {
+    padding: 18px;
+    border: 1px solid rgba(80, 150, 210, 0.12);
+    border-radius: 9px;
+    background: #081320;
+}
