@@ -1,0 +1,317 @@
+/* =========================================
+   DASHBOARD
+========================================= */
+
+.dashboard {
+    min-height: 100vh;
+    background: #050d16;
+    color: #e7f1fa;
+}
+
+
+/* =========================================
+   MAIN AREA
+========================================= */
+
+.mainArea {
+    min-height: 100vh;
+    margin-left: 250px;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.content {
+    padding: 24px;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.pageHeader {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 4px;
+}
+
+.eyebrow {
+    display: block;
+    color: #258ebc;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.pageHeader h1 {
+    margin: 6px 0 5px;
+    color: #e7f1fa;
+    font-size: 26px;
+    font-weight: 650;
+    letter-spacing: -0.5px;
+}
+
+.pageHeader p {
+    margin: 0;
+    color: #607d96;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   MONITORING STATUS
+========================================= */
+
+.systemTime {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 2px;
+}
+
+.systemTime span {
+    color: #405b73;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.systemTime strong {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #35dba6;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.systemTime i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #35dba6;
+    box-shadow: 0 0 8px #35dba6;
+}
+
+
+/* =========================================
+   KPI SECTION
+========================================= */
+
+.kpiSection {
+    margin-bottom: 20px;
+}
+
+
+/* =========================================
+   MAIN MONITORING GRID
+========================================= */
+
+.monitoringGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(330px, 0.85fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+
+/* =========================================
+   MAIN SECTIONS
+========================================= */
+
+.cameraSection,
+.heatMapSection {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(80, 150, 210, 0.14);
+    border-radius: 10px;
+    background: #081320;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================
+   SECTION HEADER
+========================================= */
+
+.sectionHeader {
+    min-height: 66px;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid rgba(80, 150, 210, 0.10);
+}
+
+.sectionEyebrow {
+    display: block;
+    color: #45657e;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+}
+
+.sectionHeader h2 {
+    margin: 4px 0 0;
+    color: #d5e5f2;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+}
+
+
+/* =========================================
+   CAMERA COUNT
+========================================= */
+
+.cameraCount {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border: 1px solid rgba(40, 220, 160, 0.14);
+    border-radius: 5px;
+    background: rgba(40, 220, 160, 0.025);
+    color: #4acfa5;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.cameraCount span {
+    width: 5px;
+    height: 5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #36dca8;
+    box-shadow: 0 0 7px #36dca8;
+}
+
+
+/* =========================================
+   BOTTOM AREA
+========================================= */
+
+.bottomGrid {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.85fr) minmax(400px, 1.15fr);
+    gap: 18px;
+    margin-top: 18px;
+}
+
+
+/* =========================================
+   SECTION HOVER
+========================================= */
+
+.cameraSection,
+.heatMapSection {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cameraSection:hover,
+.heatMapSection:hover {
+    border-color: rgba(80, 150, 210, 0.20);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.16);
+}
+
+
+/* =========================================
+   LARGE SCREEN
+========================================= */
+
+@media (min-width: 1500px) {
+    .content {
+        padding: 28px;
+    }
+    .monitoringGrid {
+        gap: 20px;
+    }
+    .bottomGrid {
+        gap: 20px;
+        margin-top: 20px;
+    }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1200px) {
+    .monitoringGrid {
+        grid-template-columns: 1fr;
+    }
+    .bottomGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================
+   SMALL TABLET
+========================================= */
+
+@media (max-width: 800px) {
+    .mainArea {
+        margin-left: 68px;
+    }
+    .content {
+        padding: 16px;
+    }
+    .pageHeader {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .systemTime {
+        align-items: flex-start;
+    }
+    .pageHeader h1 {
+        font-size: 23px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 550px) {
+    .content {
+        padding: 12px;
+    }
+    .pageHeader {
+        margin-bottom: 18px;
+    }
+    .pageHeader h1 {
+        font-size: 20px;
+    }
+    .pageHeader p {
+        font-size: 9px;
+    }
+    .sectionHeader {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+    }
+    .cameraCount {
+        align-self: flex-start;
+    }
+    .bottomGrid {
+        gap: 12px;
+        margin-top: 12px;
+    }
+}

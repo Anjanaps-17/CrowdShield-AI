@@ -1,0 +1,464 @@
+.page {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 15% 50%, rgba(0, 174, 255, 0.08), transparent 30%), radial-gradient(circle at 85% 20%, rgba(0, 255, 190, 0.05), transparent 25%), #070d18;
+    color: #e8f1ff;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.gridOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.18;
+    background-image: linear-gradient(rgba(50, 130, 190, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(50, 130, 190, 0.08) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.glowOne {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(0, 150, 255, 0.07);
+    filter: blur(100px);
+    left: -200px;
+    top: 20%;
+}
+
+.glowTwo {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(0, 255, 190, 0.04);
+    filter: blur(100px);
+    right: -150px;
+    bottom: -100px;
+}
+
+.container {
+    min-height: calc(100vh - 45px);
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    position: relative;
+    z-index: 1;
+}
+
+
+/* BRAND SECTION */
+
+.brandSection {
+    padding: 60px 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid rgba(100, 160, 210, 0.12);
+}
+
+.logoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #168cff, #1264d8);
+    box-shadow: 0 0 30px rgba(0, 140, 255, 0.25);
+    font-size: 23px;
+}
+
+.logoWrapper h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.logoWrapper h1 span {
+    color: #24bfff;
+}
+
+.logoWrapper p {
+    margin: 4px 0 0;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: #6d8ba9;
+}
+
+.brandContent {
+    max-width: 600px;
+}
+
+.statusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(0, 220, 150, 0.25);
+    border-radius: 5px;
+    background: rgba(0, 220, 150, 0.05);
+    color: #38e8aa;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+}
+
+.statusDot,
+.infoDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #24dfa0;
+    box-shadow: 0 0 10px #24dfa0;
+}
+
+.brandContent h2 {
+    margin: 0;
+    font-size: clamp(38px, 4vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+}
+
+.brandContent h2 span {
+    color: #25bfff;
+}
+
+.brandContent p {
+    max-width: 560px;
+    color: #7892ad;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-top: 25px;
+}
+
+.systemInfo {
+    display: flex;
+    gap: 35px;
+    flex-wrap: wrap;
+}
+
+.systemInfo div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 9px;
+    letter-spacing: 1.2px;
+    color: #7188a2;
+}
+
+.systemInfo strong {
+    color: #3edda8;
+    font-weight: 600;
+    margin-left: 2px;
+}
+
+
+/* LOGIN SECTION */
+
+.loginSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 7%;
+}
+
+.loginCard {
+    width: 100%;
+    max-width: 470px;
+    padding: 42px;
+    background: rgba(12, 22, 38, 0.92);
+    border: 1px solid rgba(100, 160, 210, 0.16);
+    border-radius: 14px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35), inset 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.cardHeader {
+    margin-bottom: 30px;
+}
+
+.eyebrow {
+    color: #25bfff !important;
+    font-size: 9px !important;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px !important;
+}
+
+.cardHeader h2 {
+    margin: 0;
+    font-size: 31px;
+}
+
+.cardHeader>p:last-child {
+    color: #7189a5;
+    font-size: 13px;
+    margin-top: 9px;
+}
+
+.errorMessage {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 13px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 70, 80, 0.35);
+    background: rgba(255, 50, 60, 0.08);
+    color: #ff7d85;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.errorMessage span {
+    width: 19px;
+    height: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #ef414d;
+    color: white;
+    font-weight: bold;
+}
+
+.inputGroup {
+    margin-bottom: 20px;
+}
+
+.inputGroup label {
+    display: block;
+    color: #7892ad;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.inputWrapper {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #20344d;
+    border-radius: 6px;
+    background: #091321;
+    transition: 0.2s ease;
+}
+
+.inputWrapper:focus-within {
+    border-color: #1daeff;
+    box-shadow: 0 0 0 3px rgba(20, 160, 255, 0.08);
+}
+
+.inputIcon {
+    width: 45px;
+    text-align: center;
+    color: #3e729c;
+    font-size: 13px;
+}
+
+.inputWrapper input {
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #e8f1ff;
+    font-size: 13px;
+}
+
+.inputWrapper input::placeholder {
+    color: #3e536b;
+}
+
+.passwordToggle {
+    border: none;
+    background: transparent;
+    color: #4284b3;
+    font-size: 8px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding: 12px;
+}
+
+.passwordToggle:hover {
+    color: #2cbfff;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3px 0 25px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #7189a4;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.remember input {
+    accent-color: #168fff;
+}
+
+.forgot {
+    border: none;
+    background: transparent;
+    color: #2eb9ff;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.forgot:hover {
+    text-decoration: underline;
+}
+
+.loginButton {
+    width: 100%;
+    height: 51px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #147ee5, #16a4f5);
+    color: white;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    transition: 0.2s ease;
+}
+
+.loginButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(20, 150, 240, 0.25);
+}
+
+.loginButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.registerLink {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 25px;
+    font-size: 11px;
+    color: #607991;
+}
+
+.registerLink a {
+    color: #28b8ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.registerLink a:hover {
+    text-decoration: underline;
+}
+
+.security {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(100, 150, 200, 0.1);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    color: #4f6881;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+}
+
+.security span {
+    color: #32d9a3;
+}
+
+.footer {
+    height: 45px;
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(100, 150, 200, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #42566d;
+    font-size: 8px;
+    letter-spacing: 1.2px;
+}
+
+.footer span:first-child {
+    color: #62809b;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    .brandSection {
+        padding: 35px 8%;
+        border-right: none;
+        border-bottom: 1px solid rgba(100, 160, 210, 0.12);
+    }
+    .brandContent {
+        margin: 50px 0;
+    }
+    .brandContent h2 {
+        font-size: 42px;
+    }
+    .systemInfo {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 550px) {
+    .brandSection {
+        padding: 25px 20px;
+    }
+    .brandContent {
+        margin: 40px 0;
+    }
+    .brandContent h2 {
+        font-size: 34px;
+    }
+    .loginSection {
+        padding: 30px 20px;
+    }
+    .loginCard {
+        padding: 28px 22px;
+    }
+    .footer {
+        font-size: 7px;
+    }
+}

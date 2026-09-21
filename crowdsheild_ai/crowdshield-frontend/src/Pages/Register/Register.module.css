@@ -1,0 +1,491 @@
+.page {
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(circle at 15% 40%, rgba(0, 160, 255, 0.07), transparent 30%), radial-gradient(circle at 85% 70%, rgba(0, 255, 190, 0.04), transparent 25%), #070d18;
+    color: #e8f1ff;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.gridOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.16;
+    background-image: linear-gradient(rgba(50, 130, 190, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(50, 130, 190, 0.08) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.glowOne,
+.glowTwo {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.glowOne {
+    width: 450px;
+    height: 450px;
+    left: -180px;
+    top: 20%;
+    background: rgba(0, 140, 255, 0.06);
+}
+
+.glowTwo {
+    width: 400px;
+    height: 400px;
+    right: -150px;
+    bottom: -100px;
+    background: rgba(0, 255, 190, 0.04);
+}
+
+.container {
+    min-height: calc(100vh - 45px);
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    position: relative;
+    z-index: 1;
+}
+
+.brandSection {
+    padding: 45px 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid rgba(100, 160, 210, 0.12);
+}
+
+.logoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 47px;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: linear-gradient(145deg, #168cff, #1264d8);
+    box-shadow: 0 0 30px rgba(0, 140, 255, 0.25);
+    font-size: 22px;
+}
+
+.logoWrapper h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 1.4px;
+}
+
+.logoWrapper h1 span {
+    color: #25bfff;
+}
+
+.logoWrapper p {
+    margin: 4px 0 0;
+    color: #6d8ba9;
+    font-size: 8px;
+    letter-spacing: 2.5px;
+}
+
+.brandContent {
+    max-width: 500px;
+}
+
+.statusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(0, 220, 150, 0.25);
+    background: rgba(0, 220, 150, 0.05);
+    border-radius: 5px;
+    color: #38e8aa;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin-bottom: 24px;
+}
+
+.statusDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #24dfa0;
+    box-shadow: 0 0 10px #24dfa0;
+}
+
+.brandContent h2 {
+    margin: 0;
+    font-size: clamp(36px, 4vw, 55px);
+    line-height: 1.06;
+    letter-spacing: -2px;
+}
+
+.brandContent h2 span {
+    color: #25bfff;
+}
+
+.brandContent>p {
+    color: #7892ad;
+    font-size: 13px;
+    line-height: 1.8;
+    max-width: 470px;
+    margin-top: 22px;
+}
+
+.featureList {
+    margin-top: 30px;
+    display: grid;
+    gap: 13px;
+}
+
+.featureList div {
+    color: #7d96af;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.featureList span {
+    color: #249ed9;
+    font-size: 9px;
+    font-family: monospace;
+}
+
+.systemStatus {
+    color: #58718a;
+    font-size: 9px;
+    letter-spacing: 1.4px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+
+/* REGISTER */
+
+.registerSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 35px 7%;
+}
+
+.registerCard {
+    width: 100%;
+    max-width: 620px;
+    padding: 35px 40px;
+    border-radius: 14px;
+    background: rgba(12, 22, 38, 0.94);
+    border: 1px solid rgba(100, 160, 210, 0.16);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+}
+
+.cardHeader {
+    margin-bottom: 22px;
+}
+
+.eyebrow {
+    color: #25bfff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0 0 8px;
+}
+
+.cardHeader h2 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.cardHeader>p:last-child {
+    color: #7189a5;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.errorMessage,
+.successMessage {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    margin-bottom: 18px;
+}
+
+.errorMessage {
+    background: rgba(255, 50, 60, 0.08);
+    border: 1px solid rgba(255, 70, 80, 0.3);
+    color: #ff7d85;
+}
+
+.successMessage {
+    background: rgba(0, 220, 150, 0.07);
+    border: 1px solid rgba(0, 220, 150, 0.25);
+    color: #45dfa9;
+}
+
+.errorMessage span,
+.successMessage span {
+    font-weight: bold;
+}
+
+.twoColumns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.inputGroup {
+    margin-bottom: 17px;
+}
+
+.inputGroup label {
+    display: block;
+    margin-bottom: 7px;
+    color: #7892ad;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.inputGroup>input,
+.passwordWrapper {
+    width: 100%;
+    height: 46px;
+    box-sizing: border-box;
+    border: 1px solid #20344d;
+    border-radius: 6px;
+    background: #091321;
+    color: #e8f1ff;
+}
+
+.inputGroup>input {
+    padding: 0 13px;
+    outline: none;
+}
+
+.inputGroup>input:focus,
+.passwordWrapper:focus-within {
+    border-color: #1daeff;
+    box-shadow: 0 0 0 3px rgba(20, 160, 255, 0.08);
+}
+
+.inputGroup input::placeholder {
+    color: #3e536b;
+}
+
+.passwordWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.passwordWrapper input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0 13px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #e8f1ff;
+}
+
+.passwordWrapper button {
+    border: none;
+    background: transparent;
+    color: #4284b3;
+    cursor: pointer;
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 10px;
+}
+
+.passwordWrapper button:hover {
+    color: #28baff;
+}
+
+.strength {
+    height: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.strengthBar {
+    flex: 1;
+    height: 3px;
+    background: #172638;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.strengthFill {
+    height: 100%;
+    transition: width 0.25s ease;
+}
+
+.weak {
+    color: #ff6670;
+    background-color: #ff6670;
+}
+
+.medium {
+    color: #f2a735;
+    background-color: #f2a735;
+}
+
+.strong {
+    color: #37dca3;
+    background-color: #37dca3;
+}
+
+.strength span {
+    font-size: 7px;
+    width: 45px;
+    text-align: right;
+}
+
+.terms {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    color: #617991;
+    font-size: 10px;
+    line-height: 1.5;
+    cursor: pointer;
+    margin: 4px 0 20px;
+}
+
+.terms input {
+    margin-top: 2px;
+    accent-color: #178ef0;
+}
+
+.registerButton {
+    width: 100%;
+    height: 49px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #147ee5, #16a4f5);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: 0.2s ease;
+}
+
+.registerButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(20, 150, 240, 0.25);
+}
+
+.registerButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loginLink {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+    color: #607991;
+    font-size: 10px;
+}
+
+.loginLink a {
+    color: #28b8ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.security {
+    margin-top: 22px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(100, 150, 200, 0.1);
+    text-align: center;
+    color: #4f6881;
+    font-size: 8px;
+    letter-spacing: 1.3px;
+}
+
+.security span {
+    color: #32d9a3;
+}
+
+.footer {
+    height: 45px;
+    border-top: 1px solid rgba(100, 150, 200, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #42566d;
+    font-size: 8px;
+    letter-spacing: 1.2px;
+    position: relative;
+    z-index: 2;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 950px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    .brandSection {
+        padding: 30px 8%;
+        border-right: none;
+        border-bottom: 1px solid rgba(100, 160, 210, 0.12);
+    }
+    .brandContent {
+        margin: 40px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .brandSection {
+        padding: 25px 20px;
+    }
+    .brandContent h2 {
+        font-size: 34px;
+    }
+    .registerSection {
+        padding: 25px 15px;
+    }
+    .registerCard {
+        padding: 28px 20px;
+    }
+    .twoColumns {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}

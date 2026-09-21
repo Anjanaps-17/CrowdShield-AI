@@ -1,0 +1,190 @@
+.navbar {
+    height: 76px;
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0a1422;
+    border-bottom: 1px solid rgba(80, 150, 210, 0.14);
+    color: #eaf4ff;
+}
+
+.leftSection,
+.rightSection {
+    display: flex;
+    align-items: center;
+}
+
+.leftSection {
+    gap: 14px;
+}
+
+.rightSection {
+    gap: 22px;
+}
+
+.menuButton {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(80, 150, 210, 0.18);
+    border-radius: 6px;
+    background: #0d1b2c;
+    color: #8ba8c4;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.menuButton:hover {
+    color: #20b8ff;
+    border-color: rgba(32, 184, 255, 0.4);
+}
+
+.title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: 0.3px;
+}
+
+.subtitle {
+    margin: 3px 0 0;
+    color: #627d98;
+    font-size: 9px;
+    letter-spacing: 0.4px;
+}
+
+
+/* LIVE STATUS */
+
+.liveStatus {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 10px;
+    border: 1px solid rgba(40, 220, 160, 0.18);
+    border-radius: 5px;
+    background: rgba(40, 220, 160, 0.04);
+    color: #36dba7;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.liveDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #36dba7;
+    box-shadow: 0 0 9px #36dba7;
+}
+
+
+/* NOTIFICATION */
+
+.notificationButton {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: transparent;
+    color: #91a9c0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.notificationButton:hover {
+    color: #20b8ff;
+}
+
+.notificationBadge {
+    position: absolute;
+    top: 0;
+    right: -2px;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #e94b57;
+    color: white;
+    font-size: 7px;
+    font-weight: 700;
+}
+
+
+/* PROFILE */
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding-left: 18px;
+    border-left: 1px solid rgba(80, 150, 210, 0.12);
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1678b8, #20c4df);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.profileInfo strong,
+.profileInfo span {
+    display: block;
+}
+
+.profileInfo strong {
+    color: #dbe9f7;
+    font-size: 10px;
+}
+
+.profileInfo span {
+    margin-top: 3px;
+    color: #607b96;
+    font-size: 8px;
+}
+
+.arrow {
+    margin-left: 3px;
+    color: #66829d;
+    font-size: 14px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+    .liveStatus,
+    .profileInfo,
+    .arrow {
+        display: none;
+    }
+    .rightSection {
+        gap: 8px;
+    }
+    .profile {
+        padding-left: 8px;
+    }
+}
+
+@media (max-width: 500px) {
+    .navbar {
+        padding: 0 14px;
+    }
+    .subtitle {
+        display: none;
+    }
+    .title {
+        font-size: 14px;
+    }
+}
