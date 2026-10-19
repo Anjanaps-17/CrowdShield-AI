@@ -1,0 +1,34 @@
+[
+  {
+    "video_name": "Video 1 (Stage Area)",
+    "file": "11832-233049403_medium.mp4",
+    "total_frames": 634,
+    "fps": 8.75,
+    "avg_count": 0.0,
+    "risk_status": "LOW RISK"
+  },
+  {
+    "video_name": "Video 2 (Walkway Stream)",
+    "file": "142030-779071797_medium.mp4",
+    "total_frames": 358,
+    "fps": 3.91,
+    "avg_count": 10.0,
+    "risk_status": "MEDIUM RISK"
+  },
+  {
+    "video_name": "Video 3 (Concert Square)",
+    "file": "3630-172488409_medium.mp4",
+    "total_frames": 763,
+    "fps": 10.99,
+    "avg_count": 18.7,
+    "risk_status": "HIGH RISK"
+  },
+  {
+    "video_name": "Video 4 (Night Crowd)",
+    "file": "41823-431406517_medium.mp4",
+    "total_frames": 672,
+    "fps": 11.06,
+    "avg_count": 4.7,
+    "risk_status": "LOW RISK"
+  }
+]
