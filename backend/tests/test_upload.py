@@ -140,3 +140,47 @@ def test_oversized_request_returns_json_error():
     assert response.get_json()["error"] == (
         "Uploaded request exceeds the configured limit of 100 bytes"
     )
+
+
+@patch("app.routes.upload.process_uploaded_video")
+def test_upload_save_failure_returns_json_error(mock_upload):
+    client = setup_client()
+    mock_upload.side_effect = OSError("Disk is unavailable")
+
+    response = client.post(
+        "/upload-video",
+        data={"video": (io.BytesIO(b"fake video"), "sample.mp4")},
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 500
+    assert response.is_json
+    assert response.get_json()["error"] == (
+        "Unable to save the uploaded video"
+    )
+
+
+@patch("app.routes.upload.process_video")
+@patch("app.routes.upload.process_uploaded_video")
+def test_ai_processing_failure_returns_json_error(
+    mock_upload,
+    mock_process,
+):
+    client = setup_client()
+    mock_upload.return_value = {"file_path": "fake_video.mp4"}
+    mock_process.side_effect = RuntimeError("AI processing failed")
+
+    response = client.post(
+        "/upload-video",
+        data={"video": (io.BytesIO(b"fake video"), "sample.mp4")},
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 500
+    assert response.is_json
+    assert response.get_json()["error"] == (
+        "Video uploaded, but AI processing failed"
+    )
+
+    mock_upload.assert_called_once()
+    mock_process.assert_called_once_with("fake_video.mp4")
