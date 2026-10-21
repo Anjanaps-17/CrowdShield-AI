@@ -1,7 +1,11 @@
-﻿import io
+﻿
+import io
 from unittest.mock import patch
 
+from werkzeug.datastructures import FileStorage
+
 from app import create_app
+from app.services.upload_service import process_uploaded_video
 
 
 def setup_client():
@@ -63,7 +67,76 @@ def test_upload_accepts_mp4_extension(mock_upload, mock_process):
     )
 
     assert response.status_code == 200
+
     data = response.get_json()
     assert data["ai_result"]["status"] == "success"
+
     mock_upload.assert_called_once()
     mock_process.assert_called_once_with("fake_video.mp4")
+
+
+def test_upload_service_rejects_invalid_filename():
+    video = FileStorage(
+        stream=io.BytesIO(b"fake video"),
+        filename="",
+    )
+
+    try:
+        process_uploaded_video(video)
+        assert False, "Expected ValueError for invalid filename"
+    except ValueError as error:
+        assert str(error) == "Invalid filename"
+
+
+def test_upload_service_rejects_unsupported_extension():
+    video = FileStorage(
+        stream=io.BytesIO(b"not a video"),
+        filename="document.txt",
+    )
+
+    try:
+        process_uploaded_video(video)
+        assert False, "Expected ValueError for unsupported extension"
+    except ValueError as error:
+        assert str(error) == "Unsupported video format"
+
+
+@patch("app.services.upload_service.uuid4")
+def test_upload_service_uses_generated_filename(mock_uuid, tmp_path):
+    mock_uuid.return_value.hex = "abc123"
+
+    video = FileStorage(
+        stream=io.BytesIO(b"fake video"),
+        filename="../../sample.mp4",
+    )
+
+    with patch(
+        "app.services.upload_service.UPLOAD_FOLDER",
+        str(tmp_path),
+    ):
+        result = process_uploaded_video(video)
+
+    assert result["filename"] == "abc123.mp4"
+    assert result["original_filename"] == "sample.mp4"
+    assert result["file_path"] == str(tmp_path / "abc123.mp4")
+    assert (tmp_path / "abc123.mp4").exists()
+
+
+def test_oversized_request_returns_json_error():
+    app = create_app()
+    app.config["TESTING"] = True
+    app.config["MAX_CONTENT_LENGTH"] = 100
+
+    client = app.test_client()
+
+    response = client.post(
+        "/upload-video",
+        data={"video": (io.BytesIO(b"x" * 200), "sample.mp4")},
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 413
+    assert response.is_json
+    assert response.get_json()["error"] == (
+        "Uploaded request exceeds the configured limit of 100 bytes"
+    )
