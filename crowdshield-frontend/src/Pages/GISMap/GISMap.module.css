@@ -1,0 +1,31 @@
+.backRow {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border: 1px solid rgba(70, 190, 240, 0.4);
+    border-radius: 7px;
+    background: #0d2032;
+    color: #a8e8ff;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.backButton:hover {
+    background: #173650;
+}
+
+@media (max-width: 550px) {
+    .backButton {
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+}
