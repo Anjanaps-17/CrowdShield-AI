@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import styles from "./CCTV.module.css";
 
@@ -10,6 +11,18 @@ function CameraCard({ camera, onClick }) {
   const videoInputRef = useRef(null);
   const videoUrlRef = useRef(null);
 
+  // Identify the logged-in user's role.
+  const currentUser = (() => {
+    try {
+      return JSON.parse(localStorage.getItem("crowdshieldUser") || "null");
+    } catch {
+      return null;
+    }
+  })();
+
+  const isController =
+    currentUser?.role?.toLowerCase() === "controller";
+
   const riskLabel =
     camera.status === "critical"
       ? "HIGH"
@@ -18,6 +31,13 @@ function CameraCard({ camera, onClick }) {
       : "LOW";
 
   const handleVideoUpload = (event) => {
+    // Prevent normal users from uploading videos.
+    if (!isController) {
+      setVideoError("Only controllers can upload videos.");
+      event.target.value = "";
+      return;
+    }
+
     const file = event.target.files?.[0];
 
     if (!file) return;
@@ -37,7 +57,6 @@ function CameraCard({ camera, onClick }) {
     }
 
     const videoUrl = URL.createObjectURL(file);
-
     videoUrlRef.current = videoUrl;
 
     setVideoSrc(videoUrl);
@@ -85,7 +104,7 @@ function CameraCard({ camera, onClick }) {
               onClick={(event) => event.stopPropagation()}
               onError={() =>
                 setVideoError(
-                  "Video playback failed. Try another MP4 file."
+                  "Video playback failed. Try another video file."
                 )
               }
             />
@@ -93,31 +112,40 @@ function CameraCard({ camera, onClick }) {
             <div className={styles.videoPlaceholder}>
               <div className={styles.cameraIcon}>▣</div>
               <span>CAMERA FEED</span>
-              <small>UPLOAD A DEMO VIDEO</small>
+              <small>
+                {isController
+                  ? "UPLOAD A DEMO VIDEO"
+                  : "NO VIDEO AVAILABLE"}
+              </small>
             </div>
           )}
 
-          <input
-            ref={videoInputRef}
-            type="file"
-            accept="video/*,.mp4,.webm,.ogg,.mov,.m4v"
-            className={styles.videoUploadInput}
-            onChange={handleVideoUpload}
-            onClick={(event) => event.stopPropagation()}
-          />
+          {/* Only controllers can see the upload controls. */}
+          {isController && (
+            <>
+              <input
+                ref={videoInputRef}
+                type="file"
+                accept="video/*,.mp4,.webm,.ogg,.mov,.m4v"
+                className={styles.videoUploadInput}
+                onChange={handleVideoUpload}
+                onClick={(event) => event.stopPropagation()}
+              />
 
-          <div className={styles.videoActions}>
-            <button
-              type="button"
-              className={styles.uploadVideoButton}
-              onClick={(event) => {
-                event.stopPropagation();
-                videoInputRef.current?.click();
-              }}
-            >
-              {videoSrc ? "Replace Video" : "Upload Video"}
-            </button>
-          </div>
+              <div className={styles.videoActions}>
+                <button
+                  type="button"
+                  className={styles.uploadVideoButton}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    videoInputRef.current?.click();
+                  }}
+                >
+                  {videoSrc ? "Replace Video" : "Upload Video"}
+                </button>
+              </div>
+            </>
+          )}
 
           {videoError && (
             <div className={styles.videoError} role="alert">
@@ -125,7 +153,6 @@ function CameraCard({ camera, onClick }) {
             </div>
           )}
 
-          {/* Expand button */}
           <button
             type="button"
             className={styles.expandIcon}
@@ -153,7 +180,6 @@ function CameraCard({ camera, onClick }) {
 
           <div className={styles.cameraStatus}>
             <span className={styles.statusDot}></span>
-
             <div>
               <strong>{riskLabel}</strong>
               <span>
@@ -164,7 +190,6 @@ function CameraCard({ camera, onClick }) {
         </div>
       </div>
 
-      {/* Expanded camera view */}
       {isExpanded && (
         <div
           className={styles.expandedOverlay}
@@ -201,9 +226,11 @@ function CameraCard({ camera, onClick }) {
             ) : (
               <div className={styles.expandedPlaceholder}>
                 <div className={styles.cameraIcon}>▣</div>
-                <span>No video uploaded</span>
+                <span>No video available</span>
                 <small>
-                  Upload a demo video from this camera card.
+                  {isController
+                    ? "Upload a demo video from the camera card."
+                    : "A camera feed has not been provided."}
                 </small>
               </div>
             )}
@@ -212,7 +239,6 @@ function CameraCard({ camera, onClick }) {
               <span>
                 Risk: <strong>{riskLabel}</strong>
               </span>
-
               <span>
                 Crowd count:{" "}
                 <strong>
