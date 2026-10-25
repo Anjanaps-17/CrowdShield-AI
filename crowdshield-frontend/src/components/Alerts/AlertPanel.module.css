@@ -1,0 +1,156 @@
+.alertPanel {
+    width: 100%;
+    color: #e8f1ff;
+}
+
+.alertHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(120, 170, 220, 0.12);
+}
+
+.alertHeader h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.alertHeader p {
+    margin: 5px 0 0;
+    color: #718eac;
+    font-size: 11px;
+}
+
+.alertCount {
+    padding: 5px 9px;
+    border-radius: 5px;
+    background: rgba(255, 70, 80, 0.1);
+    color: #ff5965;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+}
+
+.alertList {
+    padding: 10px;
+}
+
+.alertItem {
+    display: flex;
+    gap: 12px;
+    padding: 13px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: #0a1929;
+}
+
+.highAlert {
+    border-color: rgba(255, 75, 85, 0.2);
+}
+
+.mediumAlert {
+    border-color: rgba(244, 183, 53, 0.2);
+}
+
+.alertIcon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.highAlert .alertIcon {
+    background: rgba(255, 75, 85, 0.15);
+    color: #ff5965;
+}
+
+.mediumAlert .alertIcon {
+    background: rgba(244, 183, 53, 0.15);
+    color: #f4b735;
+}
+
+.alertContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.alertTitleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.alertTitleRow strong {
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.highAlert .alertTitleRow strong {
+    color: #ff5965;
+}
+
+.mediumAlert .alertTitleRow strong {
+    color: #f4b735;
+}
+
+.alertTitleRow span {
+    color: #557797;
+    font-size: 9px;
+}
+
+.alertContent h4 {
+    margin: 5px 0;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.alertContent p {
+    margin: 0;
+    color: #718eac;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.alertContent p strong {
+    color: #d9e9f8;
+}
+
+.alertDetails {
+    display: flex;
+    gap: 15px;
+    margin-top: 8px;
+    color: #587895;
+    font-size: 9px;
+}
+
+.noAlerts {
+    padding: 30px 15px;
+    text-align: center;
+}
+
+.noAlerts span {
+    display: block;
+    margin-bottom: 8px;
+    color: #00d99b;
+    font-size: 24px;
+}
+
+.noAlerts strong {
+    display: block;
+    color: #dcecff;
+    font-size: 12px;
+}
+
+.noAlerts p {
+    color: #718eac;
+    font-size: 10px;
+}

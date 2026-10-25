@@ -1,0 +1,51 @@
+const cameras = [{
+        id: 1,
+        name: "CAM-01",
+        location: "Main Entrance",
+        status: "normal",
+        people: 1240,
+        video: null,
+    },
+    {
+        id: 2,
+        name: "CAM-02",
+        location: "Central Plaza",
+        status: "warning",
+        people: 2180,
+        video: null,
+    },
+    {
+        id: 3,
+        name: "CAM-03",
+        location: "North Gate",
+        status: "normal",
+        people: 980,
+        video: null,
+    },
+    {
+        id: 4,
+        name: "CAM-04",
+        location: "Food Court",
+        status: "critical",
+        people: 3420,
+        video: null,
+    },
+    {
+        id: 5,
+        name: "CAM-05",
+        location: "Parking Area",
+        status: "normal",
+        people: 760,
+        video: null,
+    },
+    {
+        id: 6,
+        name: "CAM-06",
+        location: "South Entrance",
+        status: "warning",
+        people: 1890,
+        video: null,
+    },
+];
+
+export default cameras;
