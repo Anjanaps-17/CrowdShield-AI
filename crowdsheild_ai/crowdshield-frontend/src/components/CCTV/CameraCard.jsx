@@ -1,6 +1,137 @@
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import Hls from "hls.js";
 import styles from "./CCTV.module.css";
+
+// Reusable player for demo videos and HLS streams.
+function CameraVideo({ src, className, onClick }) {
+  const videoRef = useRef(null);
+  const hlsRef = useRef(null);
+  const [nativeHlsSupported, setNativeHlsSupported] = useState(false);
+
+  const setVideoRef = useCallback((video) => {
+    videoRef.current = video;
+    setNativeHlsSupported(
+      Boolean(video?.canPlayType("application/vnd.apple.mpegurl"))
+    );
+  }, []);
+
+  const [playbackError, setPlaybackError] = useState({
+    src: "",
+    message: "",
+  });
+
+  
+
+  const isHlsSource = /\.m3u8(?:$|[?#])/i.test(src || "");
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video || !src) return;
+
+    const isHls = /\.m3u8(?:$|[?#])/i.test(src);
+
+    // Ordinary demo videos, such as MP4 and WebM.
+    if (!isHls) {
+      video.src = src;
+
+      return () => {
+        video.removeAttribute("src");
+        video.load();
+      };
+    }
+
+    // Native HLS support, available in some browsers.
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = src;
+
+      return () => {
+        video.removeAttribute("src");
+        video.load();
+      };
+    }
+
+    // HLS playback through hls.js.
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hlsRef.current = hls;
+
+      hls.on(Hls.Events.ERROR, (_event, data) => {
+        if (data.fatal) {
+          setPlaybackError({
+            src,
+            message:
+              "HLS playback failed. Check the stream URL and server.",
+          });
+
+          hls.destroy();
+
+          if (hlsRef.current === hls) {
+            hlsRef.current = null;
+          }
+        }
+      });
+
+      hls.loadSource(src);
+      hls.attachMedia(video);
+
+      return () => {
+        hls.destroy();
+
+        if (hlsRef.current === hls) {
+          hlsRef.current = null;
+        }
+
+        video.removeAttribute("src");
+        video.load();
+      };
+    }
+
+    // No synchronous state update inside this effect.
+    return undefined;
+  }, [src]);
+
+  const hlsJsSupported = Hls.isSupported();
+
+  const handleVideoError = () => {
+    setPlaybackError({
+      src,
+      message: "Video playback failed. Check the video or stream URL.",
+    });
+  };
+
+  const showUnsupportedMessage =
+    isHlsSource &&
+    !nativeHlsSupported &&
+    !hlsJsSupported;
+
+  return (
+    <>
+      <video
+        ref={setVideoRef}
+        className={className}
+        controls
+        playsInline
+        preload="metadata"
+        onClick={onClick}
+        onError={handleVideoError}
+      />
+
+      {playbackError.src === src && playbackError.message && (
+        <div className={styles.videoError} role="alert">
+          {playbackError.message}
+        </div>
+      )}
+
+      {showUnsupportedMessage && (
+        <div className={styles.videoError} role="alert">
+          This browser does not support HLS playback.
+        </div>
+      )}
+    </>
+  );
+}
 
 function CameraCard({ camera, onClick }) {
   const [videoSrc, setVideoSrc] = useState(camera.video || "");
@@ -14,7 +145,9 @@ function CameraCard({ camera, onClick }) {
   // Identify the logged-in user's role.
   const currentUser = (() => {
     try {
-      return JSON.parse(localStorage.getItem("crowdshieldUser") || "null");
+      return JSON.parse(
+        localStorage.getItem("crowdshieldUser") || "null"
+      );
     } catch {
       return null;
     }
@@ -30,8 +163,10 @@ function CameraCard({ camera, onClick }) {
       ? "MEDIUM"
       : "LOW";
 
+  // Uploaded demo videos take priority over the optional HLS stream.
+  const playbackSrc = videoSrc || camera.hlsUrl || "";
+
   const handleVideoUpload = (event) => {
-    // Prevent normal users from uploading videos.
     if (!isController) {
       setVideoError("Only controllers can upload videos.");
       event.target.value = "";
@@ -66,6 +201,7 @@ function CameraCard({ camera, onClick }) {
     event.target.value = "";
   };
 
+  // Release uploaded video URLs when the component unmounts.
   useEffect(() => {
     return () => {
       if (videoUrlRef.current) {
@@ -73,6 +209,14 @@ function CameraCard({ camera, onClick }) {
       }
     };
   }, []);
+
+  const feedLabel = videoName
+    ? "DEMO VIDEO"
+    : videoSrc
+    ? "VIDEO READY"
+    : camera.hlsUrl
+    ? "HLS STREAM"
+    : "NO FEED";
 
   return (
     <>
@@ -83,30 +227,18 @@ function CameraCard({ camera, onClick }) {
         <div className={styles.videoArea}>
           <div className={styles.liveBadge}>
             <span></span>
-            {videoName
-              ? "DEMO VIDEO"
-              : videoSrc
-              ? "VIDEO READY"
-              : "NO FEED"}
+            {feedLabel}
           </div>
 
           <div className={styles.cameraNumber}>
             {camera.name}
           </div>
 
-          {videoSrc ? (
-            <video
+          {playbackSrc ? (
+            <CameraVideo
+              src={playbackSrc}
               className={styles.videoPlayer}
-              src={videoSrc}
-              controls
-              playsInline
-              preload="metadata"
               onClick={(event) => event.stopPropagation()}
-              onError={() =>
-                setVideoError(
-                  "Video playback failed. Try another video file."
-                )
-              }
             />
           ) : (
             <div className={styles.videoPlaceholder}>
@@ -215,13 +347,10 @@ function CameraCard({ camera, onClick }) {
               </button>
             </div>
 
-            {videoSrc ? (
-              <video
+            {playbackSrc ? (
+              <CameraVideo
+                src={playbackSrc}
                 className={styles.expandedVideo}
-                src={videoSrc}
-                controls
-                playsInline
-                preload="metadata"
               />
             ) : (
               <div className={styles.expandedPlaceholder}>
