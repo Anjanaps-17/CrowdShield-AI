@@ -1,122 +1,44 @@
-import { useState } from "react";
+
 import cameras from "../../data/cameras";
 import CameraCard from "./CameraCard";
 import styles from "./CCTV.module.css";
 
-function CameraGrid() {
-  const [selectedCamera, setSelectedCamera] =
-    useState(null);
+function CameraGrid({ limit }) {
+
+
+  const riskPriority = {
+    critical: 3,
+    warning: 2,
+    normal: 1,
+  };
+
+  // Sort by risk first, then by crowd count.
+  const sortedCameras = [...cameras].sort((a, b) => {
+    const riskDifference =
+      riskPriority[b.status] - riskPriority[a.status];
+
+    if (riskDifference !== 0) {
+      return riskDifference;
+    }
+
+    return Number(b.people || 0) - Number(a.people || 0);
+  });
+
+  // Show only the requested number when a limit is supplied.
+  const visibleCameras =
+    Number.isInteger(limit) && limit >= 0
+      ? sortedCameras.slice(0, limit)
+      : sortedCameras;
 
   return (
-    <>
-      <div className={styles.cameraGrid}>
-        {cameras.map((camera) => (
-          <CameraCard
-            key={camera.id}
-            camera={camera}
-            onSelect={setSelectedCamera}
-          />
-        ))}
-      </div>
-
-      {selectedCamera && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setSelectedCamera(null)}
-        >
-          <div
-            className={styles.modal}
-            onClick={(event) =>
-              event.stopPropagation()
-            }
-          >
-            <div className={styles.modalHeader}>
-              <div>
-                <span className={styles.modalLabel}>
-                  LIVE SURVEILLANCE
-                </span>
-
-                <h2>
-                  {selectedCamera.location}
-                </h2>
-
-                <p>{selectedCamera.name}</p>
-              </div>
-
-              <button
-                className={styles.closeButton}
-                onClick={() =>
-                  setSelectedCamera(null)
-                }
-              >
-                ×
-              </button>
-            </div>
-
-            <div className={styles.largeFeed}>
-              {selectedCamera.video ? (
-                <video
-                  src={selectedCamera.video}
-                  autoPlay
-                  muted
-                  loop
-                  controls
-                  playsInline
-                />
-              ) : (
-                <div
-                  className={
-                    styles.largePlaceholder
-                  }
-                >
-                  <div className={styles.largeCameraIcon}>
-                    ▣
-                  </div>
-
-                  <strong>
-                    LIVE CCTV FEED
-                  </strong>
-
-                  <span>
-                    {selectedCamera.name} ·{" "}
-                    {selectedCamera.location}
-                  </span>
-
-                  <small>
-                    Connect your CCTV video to display
-                    the live feed here.
-                  </small>
-                </div>
-              )}
-
-              <div className={styles.modalLive}>
-                <span></span>
-                LIVE
-              </div>
-            </div>
-
-            <div className={styles.modalStats}>
-              <div>
-                <span>CURRENT CROWD</span>
-                <strong>
-                  {selectedCamera.people.toLocaleString()}
-                </strong>
-              </div>
-
-              <div>
-                <span>CAMERA STATUS</span>
-                <strong>ONLINE</strong>
-              </div>
-
-              <div>
-                <span>AI MONITORING</span>
-                <strong>ACTIVE</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+    <div className={styles.cameraGrid}>
+      {visibleCameras.map((camera) => (
+        <CameraCard
+  key={camera.id}
+  camera={camera}
+/>
+      ))}
+    </div>
   );
 }
 

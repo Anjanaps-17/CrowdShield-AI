@@ -1,22 +1,20 @@
+
 import cameras from "../../data/cameras";
 import styles from "./KPICards.module.css";
 
-function KPICards() {
-  // Total crowd
+function KPICards({ compact = false }) {
   const totalCrowd = cameras.reduce(
     (total, camera) => total + Number(camera.people || 0),
     0
   );
 
-  // Average people per camera
-  const averageCrowd = Math.round(
-    totalCrowd / cameras.length
-  );
+  const averageCrowd =
+    cameras.length > 0
+      ? Math.round(totalCrowd / cameras.length)
+      : 0;
 
-  // All cameras in our current dataset are active
   const activeCameras = cameras.length;
 
-  // Critical cameras
   const criticalAlerts = cameras.filter(
     (camera) => camera.status === "critical"
   ).length;
@@ -30,7 +28,6 @@ function KPICards() {
       icon: "👥",
       type: "blue",
     },
-
     {
       title: "CROWD DENSITY",
       value: averageCrowd.toLocaleString(),
@@ -39,7 +36,6 @@ function KPICards() {
       icon: "◉",
       type: "orange",
     },
-
     {
       title: "ACTIVE CAMERAS",
       value: `${activeCameras}/${cameras.length}`,
@@ -48,7 +44,6 @@ function KPICards() {
       icon: "▣",
       type: "green",
     },
-
     {
       title: "CRITICAL ALERTS",
       value: String(criticalAlerts).padStart(2, "0"),
@@ -63,11 +58,17 @@ function KPICards() {
   ];
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${
+        compact ? styles.compactContainer : ""
+      }`}
+    >
       {cards.map((card) => (
         <div
           key={card.title}
-          className={`${styles.card} ${styles[card.type]}`}
+          className={`${styles.card} ${styles[card.type]} ${
+            compact ? styles.compactCard : ""
+          }`}
         >
           <div className={styles.topRow}>
             <span className={styles.title}>

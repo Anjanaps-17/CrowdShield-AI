@@ -1,6 +1,10 @@
+
+import { useNavigate } from "react-router-dom";
 import styles from "./Reports.module.css";
 
 function Reports() {
+  const navigate = useNavigate();
+
   const reports = [
     {
       id: "RPT-001",
@@ -34,6 +38,16 @@ function Reports() {
 
   return (
     <div className={styles.page}>
+      <div className={styles.backRow}>
+        <button
+          type="button"
+          className={styles.backButton}
+          onClick={() => navigate("/dashboard")}
+        >
+          ← Back to Dashboard
+        </button>
+      </div>
+
       <div className={styles.header}>
         <div>
           <span>SECURITY INTELLIGENCE</span>

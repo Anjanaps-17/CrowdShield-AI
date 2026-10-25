@@ -1,7 +1,11 @@
+
+import { useNavigate } from "react-router-dom";
 import cameras from "../../data/cameras";
 import styles from "./Analytics.module.css";
 
 function Analytics() {
+  const navigate = useNavigate();
+
   const totalPeople = cameras.reduce(
     (total, camera) => total + Number(camera.people || 0),
     0
@@ -26,6 +30,16 @@ function Analytics() {
 
   return (
     <div className={styles.page}>
+      <div className={styles.backRow}>
+        <button
+          type="button"
+          className={styles.backButton}
+          onClick={() => navigate("/dashboard")}
+        >
+          ← Back to Dashboard
+        </button>
+      </div>
+
       <div className={styles.header}>
         <div>
           <span>DATA INTELLIGENCE</span>

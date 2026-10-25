@@ -1,8 +1,12 @@
+
+import { useNavigate } from "react-router-dom";
 import cameras from "../../data/cameras";
 import CameraGrid from "../../components/CCTV/CameraGrid";
 import styles from "./CameraDetails.module.css";
 
 function CameraDetails() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -22,6 +26,16 @@ function CameraDetails() {
       </div>
 
       <div className={styles.content}>
+        <div className={styles.backRow}>
+          <button
+            type="button"
+            className={styles.backButton}
+            onClick={() => navigate("/dashboard")}
+          >
+            ← Back to Dashboard
+          </button>
+        </div>
+
         <CameraGrid />
       </div>
     </div>

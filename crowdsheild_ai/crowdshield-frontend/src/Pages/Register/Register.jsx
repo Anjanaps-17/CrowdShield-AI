@@ -18,6 +18,7 @@ function Register() {
     useState(false);
 
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -89,6 +90,12 @@ function Register() {
       setError("Please complete all required fields.");
       return;
     }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.com$/i;
+
+if (!emailPattern.test(formData.email.trim())) {
+  setError("Please enter a valid email address ending with @ and .com.");
+  return;
+}
 
     if (formData.password.length < 6) {
       setError("Password must contain at least 6 characters.");
@@ -356,8 +363,10 @@ function Register() {
                 </div>
               </div>
 
-              {/* TERMS */}
-              <label className={styles.terms}>
+            
+        {/* TERMS AND CONDITIONS */}
+            <div className={styles.termsContainer}>
+              <label className={styles.termsCheckbox}>
                 <input
                   type="checkbox"
                   checked={acceptedTerms}
@@ -366,11 +375,21 @@ function Register() {
                   }
                 />
 
-                <span>
-                  I agree to the CrowdShield AI terms of
-                  service and security policy.
-                </span>
+                <span>I agree to the CrowdShield AI</span>
               </label>
+
+              <button
+                type="button"
+                className={styles.termsLink}
+                onClick={() => setShowTerms(true)}
+              >
+                Terms and Conditions
+              </button>
+
+              <span className={styles.termsEnding}>
+                and security policy.
+              </span>
+            </div>
 
               {/* REGISTER BUTTON */}
               <button
@@ -391,6 +410,130 @@ function Register() {
                 )}
               </button>
             </form>
+
+            {/* TERMS AND CONDITIONS POP-UP */}
+{showTerms && (
+  <div
+    className={styles.termsModalOverlay}
+    onClick={() => setShowTerms(false)}
+  >
+    <div
+      className={styles.termsModal}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="termsTitle"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className={styles.termsModalHeader}>
+        <div>
+          <p className={styles.eyebrow}>
+            PLATFORM GUIDELINES
+          </p>
+
+          <h2 id="termsTitle">
+            Terms and Conditions
+          </h2>
+        </div>
+
+        <button
+          type="button"
+          className={styles.termsClose}
+          onClick={() => setShowTerms(false)}
+          aria-label="Close terms and conditions"
+        >
+          ×
+        </button>
+      </div>
+
+      <div className={styles.termsModalContent}>
+        <p>
+          Please read these terms before creating your
+          CrowdShield AI account.
+        </p>
+
+        <h3>1. Purpose of the Platform</h3>
+        <p>
+          CrowdShield AI is a crowd-monitoring and safety
+          project designed to assist in identifying crowd
+          density, potential risks and emergency situations.
+        </p>
+
+        <h3>2. Video Uploads</h3>
+        <p>
+          Users may upload video files for demonstration
+          and analysis. Only upload videos you are authorised
+          to use. Avoid uploading confidential or sensitive
+          footage without appropriate permission.
+        </p>
+
+        <h3>3. AI Analysis and Risk Alerts</h3>
+        <p>
+          AI-generated crowd counts, risk classifications
+          and alerts may be inaccurate. They should not be
+          treated as a guaranteed assessment of a real-world
+          emergency or as a replacement for human judgement.
+        </p>
+
+        <h3>4. Account Security</h3>
+        <p>
+          Users are responsible for keeping their login
+          credentials confidential and for activity carried
+          out through their accounts.
+        </p>
+
+        <h3>5. Privacy and Data</h3>
+        <p>
+          Uploaded videos and account information should be
+          handled in accordance with the platform's actual
+          data-storage and privacy practices. Do not upload
+          personal or sensitive information unless you have
+          the necessary authorisation.
+        </p>
+
+        <h3>6. Appropriate Use</h3>
+        <p>
+          The platform must be used responsibly for
+          crowd-monitoring demonstrations, testing and
+          authorised safety-related purposes.
+        </p>
+
+        <h3>7. Acknowledgement</h3>
+        <p>
+          By accepting these terms, you confirm that you have
+          read these guidelines and agree to use CrowdShield
+          AI responsibly.
+        </p>
+
+        <p className={styles.termsNotice}>
+          These are project-level usage guidelines. Adapt
+          them to your actual privacy, storage and deployment
+          arrangements before using the platform operationally.
+        </p>
+      </div>
+
+      <div className={styles.termsModalFooter}>
+        <button
+          type="button"
+          className={styles.termsAgreeButton}
+          onClick={() => {
+            setAcceptedTerms(true);
+            setShowTerms(false);
+          }}
+        >
+          I Agree
+        </button>
+
+        <button
+          type="button"
+          className={styles.termsCancelButton}
+          onClick={() => setShowTerms(false)}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
             <div className={styles.loginLink}>
               <span>Already have an account?</span>

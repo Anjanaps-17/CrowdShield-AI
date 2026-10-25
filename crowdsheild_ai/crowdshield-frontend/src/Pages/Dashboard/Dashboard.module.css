@@ -14,8 +14,11 @@
 ========================================= */
 
 .mainArea {
+    width: 100%;
+    min-width: 0;
     min-height: 100vh;
-    margin-left: 250px;
+    margin-left: 0;
+    box-sizing: border-box;
 }
 
 
@@ -36,10 +39,19 @@
 
 .pageHeader {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
-    padding-bottom: 4px;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 0;
+}
+
+.compactTitle {
+    margin: 0;
+    color: #e7f1fa;
+    font-size: 20px;
+    font-weight: 650;
+    letter-spacing: -0.3px;
 }
 
 .eyebrow {
@@ -265,7 +277,9 @@
 
 @media (max-width: 800px) {
     .mainArea {
-        margin-left: 68px;
+        margin-left: 0;
+        width: 100%;
+        min-width: 0;
     }
     .content {
         padding: 16px;
@@ -313,5 +327,88 @@
     .bottomGrid {
         gap: 12px;
         margin-top: 12px;
+    }
+    @media (max-width: 550px) {
+        .compactTitle {
+            font-size: 17px;
+        }
+    }
+}
+
+
+/* Compact heading with KPI cards beside it */
+
+.compactDashboardHeader {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 2.2fr);
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 18px;
+}
+
+.dashboardTitleBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+}
+
+.dashboardTitleCopy {
+    min-width: 0;
+}
+
+.dashboardTitle {
+    margin: 6px 0 0;
+    color: #e7f1fa;
+    font-size: 22px;
+    font-weight: 650;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+}
+
+.headerKpis {
+    width: 100%;
+    min-width: 0;
+}
+
+.evacuationSection {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 20px;
+}
+
+
+/* Stack the header above KPIs on narrower screens */
+
+@media (max-width: 1250px) {
+    .compactDashboardHeader {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+    .headerKpis {
+        width: 100%;
+    }
+}
+
+@media (max-width: 800px) {
+    .compactDashboardHeader {
+        margin-bottom: 16px;
+    }
+    .dashboardTitle {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 550px) {
+    .dashboardTitleBlock {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .dashboardTitle {
+        font-size: 18px;
     }
 }

@@ -1,13 +1,14 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { demoUser } from "../../data/user";
+import { demoUser, demoRegularUser } from "../../data/user";
 import styles from "./Login.module.css";
 
 function Login() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -29,34 +30,43 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setError("");
 
-    if (!formData.email || !formData.password) {
-      setError("Please enter your email and password.");
+    if (!formData.username.trim() || !formData.password) {
+      setError("Please enter your username and password.");
       return;
     }
 
     setLoading(true);
 
     setTimeout(() => {
-      if (
-        formData.email === demoUser.email &&
-        formData.password === demoUser.password
-      ) {
+      const matchedUser = [demoUser, demoRegularUser].find(
+        (user) =>
+          user.username === formData.username.trim() &&
+          user.password === formData.password
+      );
+
+      if (matchedUser) {
         if (rememberMe) {
           localStorage.setItem("crowdshieldRemember", "true");
+        } else {
+          localStorage.removeItem("crowdshieldRemember");
         }
 
         localStorage.setItem("crowdshieldLoggedIn", "true");
         localStorage.setItem(
           "crowdshieldUser",
-          JSON.stringify(demoUser)
+          JSON.stringify({
+            username: matchedUser.username,
+            email: matchedUser.email,
+            name: matchedUser.name,
+            role: matchedUser.role,
+          })
         );
 
         navigate("/dashboard");
       } else {
-        setError("Invalid email or password.");
+        setError("Invalid username or password.");
       }
 
       setLoading(false);
@@ -65,13 +75,11 @@ function Login() {
 
   return (
     <div className={styles.page}>
-      {/* Background decoration */}
       <div className={styles.gridOverlay}></div>
       <div className={styles.glowOne}></div>
       <div className={styles.glowTwo}></div>
 
       <div className={styles.container}>
-        {/* LEFT BRANDING SECTION */}
         <section className={styles.brandSection}>
           <div className={styles.logoWrapper}>
             <div className={styles.logo}>
@@ -79,7 +87,9 @@ function Login() {
             </div>
 
             <div>
-              <h1>CrowdShield <span>AI</span></h1>
+              <h1>
+                CrowdShield <span>AI</span>
+              </h1>
               <p>EMERGENCY COMMAND CENTER</p>
             </div>
           </div>
@@ -124,7 +134,6 @@ function Login() {
           </div>
         </section>
 
-        {/* LOGIN SECTION */}
         <section className={styles.loginSection}>
           <div className={styles.loginCard}>
             <div className={styles.cardHeader}>
@@ -146,32 +155,28 @@ function Login() {
             )}
 
             <form onSubmit={handleSubmit}>
-              {/* EMAIL */}
+              {/* USERNAME */}
               <div className={styles.inputGroup}>
-                <label htmlFor="email">
-                  EMAIL ADDRESS
-                </label>
+                <label htmlFor="username">USERNAME</label>
 
                 <div className={styles.inputWrapper}>
-                  <span className={styles.inputIcon}>@</span>
+                  <span className={styles.inputIcon}>♙</span>
 
                   <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="admin@crowdshield.ai"
-                    value={formData.email}
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="Enter your username"
+                    value={formData.username}
                     onChange={handleChange}
-                    autoComplete="email"
+                    autoComplete="username"
                   />
                 </div>
               </div>
 
               {/* PASSWORD */}
               <div className={styles.inputGroup}>
-                <label htmlFor="password">
-                  PASSWORD
-                </label>
+                <label htmlFor="password">PASSWORD</label>
 
                 <div className={styles.inputWrapper}>
                   <span className={styles.inputIcon}>◆</span>
@@ -222,7 +227,7 @@ function Login() {
                   className={styles.forgot}
                   onClick={() =>
                     alert(
-                      "Password recovery will be connected to the backend later."
+                      "Password recovery will be connected later."
                     )
                   }
                 >
@@ -250,7 +255,6 @@ function Login() {
               </button>
             </form>
 
-            {/* REGISTER */}
             <div className={styles.registerLink}>
               <span>Don't have an account?</span>
 
@@ -259,7 +263,6 @@ function Login() {
               </Link>
             </div>
 
-            {/* SECURITY */}
             <div className={styles.security}>
               <span>◉</span>
               SECURE COMMAND ACCESS

@@ -158,3 +158,100 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Compact KPI cards */
+
+.card {
+    min-height: 130px;
+    padding: 16px;
+}
+
+.value {
+    margin: 14px 0 10px;
+    font-size: 25px;
+}
+
+.topRow {
+    gap: 8px;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+}
+
+.bottomRow {
+    gap: 8px;
+}
+
+
+/* Compact KPI layout used beside the dashboard heading */
+
+.compactContainer {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.compactCard {
+    min-width: 0;
+    min-height: 112px;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.compactCard .topRow {
+    align-items: center;
+    gap: 5px;
+}
+
+.compactCard .title {
+    min-width: 0;
+    font-size: 7px;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+}
+
+.compactCard .icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    font-size: 12px;
+}
+
+.compactCard .value {
+    margin: 9px 0 7px;
+    font-size: 23px;
+    line-height: 1.1;
+}
+
+.compactCard .bottomRow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.compactCard .change {
+    font-size: 7px;
+}
+
+.compactCard .description {
+    font-size: 8px;
+    line-height: 1.3;
+}
+
+
+/* Keep cards readable on smaller screens */
+
+@media (max-width: 900px) {
+    .compactContainer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .compactCard {
+        min-height: 105px;
+    }
+}

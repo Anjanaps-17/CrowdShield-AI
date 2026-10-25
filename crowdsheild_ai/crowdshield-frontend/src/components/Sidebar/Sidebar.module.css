@@ -262,3 +262,71 @@
         display: none;
     }
 }
+
+
+/* Sidebar opens only when the menu is clicked */
+
+.sidebar {
+    transform: translateX(-100%);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.25s ease, visibility 0.25s ease;
+}
+
+.sidebar.sidebarOpen {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* Dark background behind the open sidebar */
+
+.sidebarOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    padding: 0;
+    border: none;
+    background: rgba(0, 5, 12, 0.65);
+    cursor: pointer;
+}
+
+
+/* Keep the full navigation visible inside the drawer on small screens */
+
+@media (max-width: 800px) {
+    .sidebar {
+        width: min(280px, 85vw);
+        padding: 20px 14px;
+    }
+    .brand {
+        justify-content: flex-start;
+        padding: 4px 8px 20px;
+    }
+    .brandText,
+    .navigationTitle,
+    .navText,
+    .adminInfo,
+    .logoutButton {
+        display: initial;
+    }
+    .systemStatus {
+        display: flex;
+    }
+    .navItem {
+        justify-content: flex-start;
+        padding: 0 12px;
+    }
+    .navIcon {
+        font-size: 16px;
+    }
+    .adminProfile {
+        justify-content: flex-start;
+        padding: 10px 8px;
+        background: rgba(60, 120, 170, 0.045);
+    }
+    .navItem.active::before {
+        display: block;
+    }
+}
